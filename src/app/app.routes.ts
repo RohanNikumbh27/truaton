@@ -6,6 +6,5 @@ import { Application } from './components/reusable/application/application';
 import { App } from './app';
 
 export const routes: Routes = [
-  { path: '', component: App },
-  { path: 'careers/:id', component: Application, title: 'Apply Now' },
+  { path: 'careers/:id', component: Application, title: 'Apply Now', pathMatch: 'full' },
 ];
