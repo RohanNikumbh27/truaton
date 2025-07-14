@@ -1,19 +1,13 @@
 <section class="bg-black text-white py-20 px-6" id="apply">
   <div class="text-center mb-10">
-    <h2 class="text-5xl font-bold">Internships We Offer</h2>
+    <h2 class="text-5xl font-bold bg-gradient-to-b from-zinc-300 to-zinc-700 bg-clip-text text-transparent !z-40">Current Internships</h2>
   </div>
   <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-    <div class="bg-gradient-to-br from-zinc-900 to-zinc-800 p-6 rounded-xl hover:scale-105 transform transition duration-300">
-      <h3 class="text-2xl font-semibold mb-4">Web Development</h3>
-      <a routerLink="/apply" class="inline-block mt-4 px-5 py-2 bg-white text-black rounded-full font-medium hover:bg-gray-200 transition">Apply</a>
-    </div>
-    <div class="bg-gradient-to-br from-zinc-900 to-zinc-800 p-6 rounded-xl hover:scale-105 transform transition duration-300">
-      <h3 class="text-2xl font-semibold mb-4">Data Science</h3>
-      <a routerLink="/apply" class="inline-block mt-4 px-5 py-2 bg-white text-black rounded-full font-medium hover:bg-gray-200 transition">Apply</a>
-    </div>
-    <div class="bg-gradient-to-br from-zinc-900 to-zinc-800 p-6 rounded-xl hover:scale-105 transform transition duration-300">
-      <h3 class="text-2xl font-semibold mb-4">Android Development</h3>
-      <a routerLink="/apply" class="inline-block mt-4 px-5 py-2 bg-white text-black rounded-full font-medium hover:bg-gray-200 transition">Apply</a>
-    </div>
+    @for (intrn of internshipsArr; track $index) {
+      <div class="bg-gradient-to-br from-zinc-950 to-zinc-900 p-6 rounded-2xl hover:scale-105 hover:bg-gradient-to-b hover:from-zinc-900 hover:to-zinc-950  transform transition-all duration-500 ease-out">
+        <h3 class="text-3xl font-semibold mb-4">{{intrn?.label}}</h3>
+        <a routerLink="intrn?.link"class="inline-block mt-4 px-5 py-2 bg-zinc-300 text-black rounded-xl cursor-pointer ml-auto font-medium hover:bg-gray-200 transition">Apply</a>
+      </div>
+    }
   </div>
 </section>
