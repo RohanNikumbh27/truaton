@@ -7,6 +7,8 @@ import { Component } from '@angular/core';
   styleUrl: './navbar.css'
 })
 export class Navbar {
+  showMenu = false;
+  
   navArr = [
     {
       label: "Apply",
@@ -24,5 +26,9 @@ export class Navbar {
       id: "#contact"
     },
   ]
+
+  toggleMenu() {
+    this.showMenu = !this.showMenu;
+  }
 
 }

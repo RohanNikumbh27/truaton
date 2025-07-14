@@ -1,10 +1,38 @@
-<nav class="z-[100] bg-zinc-900/80 top-0 fixed h-[60px] w-full block text-white flex items-center backdrop-blur py-4 px-10 justify-between">
-  <img src="/Truaton.png" alt="Truaton Logo" class="h-16"/>
-  <ul class="flex gap-3">
+<nav class="z-[100] bg-zinc-900/80 top-0 fixed h-[60px] w-full text-white flex items-center backdrop-blur px-6 justify-between">
+  <img src="/Truaton.png" alt="Truaton Logo" class="h-12" />
+
+  <!-- Hamburger icon (mobile only) -->
+  <button class="md:hidden block text-white" (click)="toggleMenu()">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+         viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"/>
+    </svg>
+  </button>
+
+  <!-- Desktop Menu -->
+  <ul class="hidden md:flex gap-4 backdrop-blur">
     @for (navEl of navArr; track $index) {
-        <li><a class="hover:bg-zinc-900 py-[10px] px-2 rounded transition-all text-zinc-400" [href]="navEl.id">{{navEl.label}}</a></li>
+      <li>
+        <a class="hover:bg-zinc-900 py-[10px] px-3 rounded transition-all text-zinc-400" [href]="navEl.id">
+          {{ navEl.label }}
+        </a>
+      </li>
     }
-    <!-- <li><a  href="#internships">Internships</a></li>
-    <li><a  href="#apply">apply</a></li> -->
   </ul>
+  <!-- Mobile Menu -->
+ @if (showMenu) {
+  <ul class="md:hidden bg-zinc-900/90 text-white w-full px-6 pt-2 pb-4 absolute top-[60px] left-0 z-[99] backdrop-blur">
+  @for (navEl of navArr; track $index) {
+    <li class="py-2">
+      <a class="block px-2 py-2 rounded hover:bg-zinc-800 transition-all text-zinc-300" [href]="navEl.id" (click)="toggleMenu()">
+        {{ navEl.label }}
+      </a>
+    </li>
+  }
+</ul>
+ }
 </nav>
+
+
+
