@@ -1,11 +1,15 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common'; // Needed for @for
 import { Component } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router'; // Needed for routerLink
 
 @Component({
   selector: 'app-internships',
-  imports: [ ],
+  // Make sure these are in the imports array for standalone components
+  imports: [
+    CommonModule, // For @for loop
+    RouterLink    // For routerLink directive
+  ],
+  standalone: true, // Assuming you are using standalone components, which is modern Angular
   templateUrl: './internships.html',
   styleUrl: './internships.css'
 })
@@ -13,44 +17,55 @@ export class Internships {
   internshipsArr = [
     {
       label: "Frontend Developer",
-      link: "/frontend-developer-internship"
+      link: "/careers/frontend-developer-internship"
     },
     {
       label: "Backend Developer",
-      link: "/backend-developer-internship"
+      link: "/careers/backend-developer-internship"
     },
     {
       label: "UI/UX Designer",
-      link: "/ui-ux-internship"
+      link: "/careers/ui-ux-internship"
     },
     {
       label: "Software Developer",
-      link: "/software-developer-internship"
+      link: "/careers/software-developer-internship",
+      description: "Join our team as a Software Engineer Intern and work on real-world projects using modern technologies. You'll collaborate with experienced engineers and contribute to impactful solutions.",
+      roles: [
+        "Assist in designing, developing, and testing software applications",
+        "Collaborate with cross-functional teams to define and implement new features",
+        "Participate in code reviews and contribute to best practices"
+      ],
+      responsibilities: [
+        "Write clean, maintainable, and efficient code",
+        "Debug and resolve technical issues",
+        "Document development processes and codebase changes",
+        "Learn and adapt to new technologies as required"
+      ]
     },
     {
       label: "Junior HR",
-      link: "/junior-human-resource-internship"
+      link: "/careers/junior-human-resource-internship"
     },
     {
       label: "Business Analyst",
-      link: "/business-analyst-internship"
+      link: "/careers/business-analyst-internship"
     },
     {
       label: "Research & Development",
-      link: "/rnd-internship"
+      link: "/careers/rnd-internship"
     },
     {
       label: "QA",
-      link: "/qa-internship"
+      link: "/careers/qa-internship"
     },
     {
       label: "Software Tester",
-      link: "/software-tester-internship"
+      link: "/careers/software-tester-internship"
     },
     {
       label: "Business Executive",
-      link: "/business-executive-internship"
+      link: "/careers/business-executive-internship"
     },
-  ]
-
+  ];
 }

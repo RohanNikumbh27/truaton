@@ -20,3 +20,21 @@
     background-clip: text;
     color: transparent;
 }
+
+/* Custom black scrollbar for dark theme */
+.custom-scroll, .overflow-auto, .overflow-y-auto {
+  scrollbar-width: thin;
+  scrollbar-color: #18181b #27272a; /* thumb, track */
+}
+
+.custom-scroll::-webkit-scrollbar, .overflow-auto::-webkit-scrollbar, .overflow-y-auto::-webkit-scrollbar {
+  width: 8px;
+  background: #27272a;
+}
+.custom-scroll::-webkit-scrollbar-thumb, .overflow-auto::-webkit-scrollbar-thumb, .overflow-y-auto::-webkit-scrollbar-thumb {
+  background: #18181b;
+  border-radius: 8px;
+}
+.custom-scroll::-webkit-scrollbar-thumb:hover, .overflow-auto::-webkit-scrollbar-thumb:hover, .overflow-y-auto::-webkit-scrollbar-thumb:hover {
+  background: #000;
+}
