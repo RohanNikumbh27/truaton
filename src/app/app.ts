@@ -7,10 +7,11 @@ import { Hero } from './components/hero/hero';
 import { Services } from './components/services/services';
 import { Internships } from './components/internships/internships';
 import { Community } from './components/community/community';
+import { Navbar } from './components/navbar/navbar';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, About, Contact, Footer, Hero, Services, Internships, Community],
+  imports: [RouterOutlet, About, Contact, Footer, Hero, Services, Internships, Community, Navbar],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

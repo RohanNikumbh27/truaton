@@ -1,0 +1,12 @@
+<div class="relative group overflow-hidden w-[300px] bg-white shadow-2xs rounded-xl dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70 max-h-[200px]">
+  <img class="w-full h-auto rounded-b-xl size-full object-cover group-hover:scale-105 group-focus:scale-110 transition-transform duration-500 ease-in-out"
+    [src]="cardData.image"
+    alt="Card Image">
+  <div class="absolute bottom-0 start-0 end-0">
+    <div class="backdrop-blur p-1">
+      <h3 class="text-lg text-black">
+        {{ cardData.office }}
+      </h3>
+    </div>
+  </div>
+</div>

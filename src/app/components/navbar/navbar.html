@@ -1,0 +1,10 @@
+<nav class="z-[100] bg-zinc-900/80 top-0 fixed h-[60px] w-full block text-white flex items-center backdrop-blur py-4 px-10 justify-between">
+  <img src="/Truaton.png" alt="Truaton Logo" class="h-16"/>
+  <ul class="flex gap-3">
+    @for (navEl of navArr; track $index) {
+        <li><a class="hover:bg-zinc-900 py-[10px] px-2 rounded transition-all text-zinc-400" [href]="navEl.id">{{navEl.label}}</a></li>
+    }
+    <!-- <li><a  href="#internships">Internships</a></li>
+    <li><a  href="#apply">apply</a></li> -->
+  </ul>
+</nav>

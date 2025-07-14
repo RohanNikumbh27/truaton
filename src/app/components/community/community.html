@@ -2,33 +2,15 @@
   <div class="max-w-6xl mx-auto text-center">
     <h2 class="text-5xl font-bold mb-4">Our Growing Online Community</h2>
     <p class="text-zinc-400 mb-10">
-      Connect with a community of individuals who share your vision. Unlock boundless opportunities and foster personal growth as you pursue success.
+      Connect with a community of individuals who share your vision. Unlock boundless opportunities and foster personal
+      growth as you pursue success.
     </p>
 
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-      <!-- LinkedIn -->
-      <div class="bg-gradient-to-br from-zinc-800 to-zinc-700 rounded-xl p-6 text-center hover:scale-105 transition duration-300">
-        <h3 class="text-3xl font-bold text-white mb-2">400K+</h3>
-        <p class="text-zinc-300">LinkedIn Community</p>
-      </div>
 
-      <!-- Telegram -->
-      <div class="bg-gradient-to-br from-zinc-800 to-zinc-700 rounded-xl p-6 text-center hover:scale-105 transition duration-300">
-        <h3 class="text-3xl font-bold text-white mb-2">8K+</h3>
-        <p class="text-zinc-300">Telegram Community</p>
-      </div>
-
-      <!-- Instagram -->
-      <div class="bg-gradient-to-br from-zinc-800 to-zinc-700 rounded-xl p-6 text-center hover:scale-105 transition duration-300">
-        <h3 class="text-3xl font-bold text-white mb-2">30K+</h3>
-        <p class="text-zinc-300">Instagram Community</p>
-      </div>
-
-      <!-- Facebook -->
-      <div class="bg-gradient-to-br from-zinc-800 to-zinc-700 rounded-xl p-6 text-center hover:scale-105 transition duration-300">
-        <h3 class="text-3xl font-bold text-white mb-2">130K+</h3>
-        <p class="text-zinc-300">Facebook Community</p>
-      </div>
+    <div class="flex w-full justify-evenly gap-16 flex-wrap">
+      @for(myCard of cardArr; track $index){
+        <app-card [cardData]="myCard"></app-card>
+      }
     </div>
   </div>
 </section>
