@@ -11,8 +11,10 @@ export class Community {
 
   cardArr = [
     { office: 'NEW YORK', image: '/Truaton_New_York.png' },
-    { office: 'Russia', image: '/Truaton_Russia.png' },
-    { office: 'Chennai', image: '/Truaton_Chennai.png' },
-    { office: 'China', image: '/Truaton_China.png' },
+    { office: 'RUSSIA', image: '/Truaton_Russia.png' },
+    { office: 'CHENNAI', image: '/Truaton_Chennai.png' },
+    { office: 'CHINA', image: '/Truaton_China.png' },
+    { office: 'BANGLORE', image: '/banglore.png' },
+    { office: 'MUMBAI', image: '/mumbai.jpeg' },
   ];
 }

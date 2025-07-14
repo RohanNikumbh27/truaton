@@ -11,3 +11,12 @@
     align-items: center;
     justify-content: center;
 }
+
+.text-gradient {
+    background-image: linear-gradient(to bottom, #d4d4d8, #404040);
+    /* from-zinc-300 to-zinc-700 */
+    -webkit-background-clip: text;
+    /* For WebKit browsers like Chrome, Safari */
+    background-clip: text;
+    color: transparent;
+}
