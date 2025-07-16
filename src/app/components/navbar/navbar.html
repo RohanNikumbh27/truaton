@@ -1,4 +1,5 @@
-<nav class="fixed top-0 z-[100] left-0 right-0 min-h-[60px] h-auto bg-zinc-950/60 text-white backdrop-blur px-6 flex items-center justify-between transition-all duration-300">
+<nav
+  class="fixed top-0 z-[100] left-0 right-0 min-h-[60px] h-auto bg-zinc-950/90 text-white backdrop-blur px-6 flex items-center justify-between transition-all duration-300">
   <!-- Logo -->
   <a href="#truaton">
     <img src="/Truaton.png" alt="Truaton Logo" class="h-12" />
@@ -6,37 +7,63 @@
 
   <!-- Hamburger Icon (Mobile Only) -->
   <button class="md:hidden block" (click)="toggleMenu()">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-         viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M4 6h16M4 12h16M4 18h16" />
+    @if (showMenu) {
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
     </svg>
+    }
+    @else {
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+    </svg>
+    }
   </button>
 
   <!-- Desktop Menu -->
   <ul class="hidden md:flex gap-4">
     @for (navEl of navArr; track $index) {
-      <li>
-        <a class="text-zinc-400 hover:text-white hover:bg-zinc-800 py-2 px-3 rounded transition-all duration-300" [href]="navEl.id">
-          {{ navEl.label }}
-        </a>
-      </li>
+    <li>
+      <a class="text-zinc-400 hover:text-white hover:bg-zinc-800 py-2 px-3 rounded transition-all duration-300"
+        [href]="navEl.id">
+        {{ navEl.label }}
+      </a>
+    </li>
     }
   </ul>
 </nav>
 
 <!-- Mobile Menu Overlay -->
 @if (showMenu) {
-  <div class="fixed inset-0 bg-black/40 backdrop-blur z-[99] flex flex-col pt-[60px] justify-center items-center transition-all duration-1000">
-    <ul class="px-6 pb-4">
-      @for (navEl of navArr; track $index) {
-        <li class="py-2">
-          <a class="block px-2 py-2 rounded hover:ml-3 hover:bg-zinc-950 transition-all duration-300 text-zinc-300 text-3xl"
-             [href]="navEl.id" (click)="toggleMenu()">
-            {{ navEl.label }}
-          </a>
-        </li>
-      }
-    </ul>
-  </div>
+<div
+  class="fixed inset-0 bg-black/90 backdrop-blur z-[99] flex flex-col pt-[60px] justify-center items-center"
+  [class.animate-slideInFromTop]="!isClosing">
+  <ul class="px-6 pb-4" 
+      [class.animate-fadeInUp]="!isClosing"
+      [class.animate-fadeOutDown]="isClosing">
+    @for (navEl of navArr; track $index; let i = $index) {
+    <li class="py-2" 
+        [class.animate-slideInItem]="!isClosing"
+        [class.animate-slideOutItem]="isClosing"
+        [style.animation-delay]="isClosing ? ((navArr.length - i - 1) * 50) + 'ms' : (i * 100) + 'ms'">
+      <a class="block px-6 py-4 rounded-xl duration-300 text-zinc-300 text-3xl font-medium 
+               hover:text-white hover:scale-105 hover:bg-gradient-to-r hover:from-zinc-900 hover:to-zinc-800 
+               hover:shadow-lg hover:shadow-zinc-800/50 transform transition-all
+               relative overflow-hidden group"
+        [href]="navEl.id" (click)="toggleMenu()">
+        
+        <!-- Animated background effect -->
+        <span class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent 
+                     translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></span>
+        
+        <!-- Border glow effect -->
+        <span class="absolute inset-0 rounded-xl group-hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] 
+                     transition-all duration-300"></span>
+        
+        <!-- Text with relative positioning -->
+        <span class="relative z-10">{{ navEl.label }}</span>
+      </a>
+    </li>
+    }
+  </ul>
+</div>
 }
