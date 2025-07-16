@@ -29,8 +29,9 @@
         </div>
         }
 
-        <button (click)="closeApplication()"
-            class="bg-zinc-200 text-black px-8 py-3 rounded-2xl font-semibold text-lg hover:bg-zinc-100 transition-all mt-2 shadow-md w-full">Proceed
-            with Application</button>
+        <div class="flex gap-3">
+            <button (click)="closeApplication()" class="bg-black text-white flex-1 px-8 py-3 rounded-2xl font-semibold text-lg hover:bg-zinc-800 transition-all mt-2 shadow-md w-full">Cancel</button>
+            <button (click)="closeApplication()" class="bg-zinc-200 text-black  flex-1 px-8 py-3 rounded-2xl font-semibold text-lg hover:bg-zinc-300 transition-all mt-2 shadow-md w-full">Continue</button>
+        </div>
     </div>
 </div>
