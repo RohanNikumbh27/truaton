@@ -1,10 +1,98 @@
-<div class="fixed h-[100svh] w-[100vw] z-[100] top-0 flex items-center justify-center bg-black/70 animate-fadeIn">
-    <div
-        class="bg-zinc-800/80 p-8 max-h-[70svh] w-[90%] md:w-[60vw] rounded-3xl backdrop-blur-lg text-white shadow-2xl animate-scaleUp flex flex-col">
+<div class="fixed h-[100svh] w-[100vw] z-[100] top-0 flex items-center justify-center bg-black/70 animate-fadeIn"
+    (click)="closeApplication()">
+    <div (click)="$event.stopPropagation()"
+        class="bg-zinc-800/80 py-8 max-h-[70svh] w-[95%] md:w-[60vw] rounded-3xl backdrop-blur-lg text-white shadow-2xl animate-scaleUp flex flex-col">
         @if (internship) {
-        <h1 class="text-4xl font-bold mb-4 text-zinc-100">{{ internship.label }} Application</h1>
-        <div class="overflow-y-auto ">
+        @if(showForm) {
+        <h1 class="text-3xl font-bold mb-6 text-zinc-100 px-8">Apply for {{ internship.label }}</h1>
+        <div class="overflow-y-auto flex-1 px-8">
+            <form class="space-y-4">
+                <!-- Personal Information -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-zinc-300 mb-2">First Name *</label>
+                        <input type="text" required
+                            class="w-full px-4 py-3 bg-black/30 border border-zinc-950 rounded-xl text-white placeholder-zinc-400 focus:border-zinc-700 focus:outline-none transition-colors">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-zinc-300 mb-2">Last Name *</label>
+                        <input type="text" required
+                            class="w-full px-4 py-3 bg-black/30 border border-zinc-950 rounded-xl text-white placeholder-zinc-400 focus:border-zinc-700 focus:outline-none transition-colors">
+                    </div>
+                </div>
 
+                <div>
+                    <label class="block text-sm font-medium text-zinc-300 mb-2">Email Address *</label>
+                    <input type="email" required
+                        class="w-full px-4 py-3 bg-black/30 border border-zinc-950 rounded-xl text-white placeholder-zinc-400 focus:border-zinc-700 focus:outline-none transition-colors">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-zinc-300 mb-2">Phone Number *</label>
+                    <input type="tel" required
+                        class="w-full px-4 py-3 bg-black/30 border border-zinc-950 rounded-xl text-white placeholder-zinc-400 focus:border-zinc-700 focus:outline-none transition-colors">
+                </div>
+
+                <!-- Education -->
+                <!-- ...existing code... -->
+                <div>
+                    <label class="block text-sm font-medium text-zinc-300 mb-2">Current Education Level *</label>
+                    <app-select [options]="educationOptions" placeholder="Select your education level"
+                        (selectionChange)="onEducationChange($event)">
+                    </app-select>
+                </div>
+                <!-- ...existing code... -->
+
+                <div>
+                    <label class="block text-sm font-medium text-zinc-300 mb-2">Institution/University *</label>
+                    <input type="text" required
+                        class="w-full px-4 py-3 bg-black/30 border border-zinc-950 rounded-xl text-white placeholder-zinc-400 focus:border-zinc-700 focus:outline-none transition-colors">
+                </div>
+
+                <!-- Experience -->
+                <div>
+                    <label class="block text-sm font-medium text-zinc-300 mb-2">Relevant Experience</label>
+                    <textarea rows="4" placeholder="Tell us about any relevant experience, projects, or skills..."
+                        class="w-full px-4 py-3 bg-black/30 border border-zinc-950 rounded-xl text-white placeholder-zinc-400 focus:border-zinc-700 focus:outline-none transition-colors resize-none"></textarea>
+                </div>
+
+                <!-- Resume Upload -->
+                <div>
+                    <label class="block text-sm font-medium text-zinc-300 mb-2">Resume/CV *</label>
+                    <div
+                        class="border-2 border-dashed border-zinc-600 rounded-xl p-6 text-center hover:border-zinc-500 transition-colors">
+                        <input type="file" accept=".pdf,.doc,.docx" class="hidden" id="resume-upload">
+                        <label for="resume-upload" class="cursor-pointer">
+                            <div class="text-zinc-400 mb-2">
+                                <svg class="mx-auto h-8 w-8 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12">
+                                    </path>
+                                </svg>
+                            </div>
+                            <span class="text-zinc-300">Click to upload or drag and drop</span>
+                            <p class="text-xs text-zinc-500 mt-1">PDF, DOC, DOCX (max 5MB)</p>
+                        </label>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Form Actions -->
+        <div class="flex gap-4 pt-4 px-8">
+            <button (click)="setShowForm(false)"
+                class="bg-black text-white flex-1 px-8 py-3 rounded-2xl font-semibold text-lg hover:bg-zinc-800 transition-all mt-2 shadow-md w-full">
+                Back
+            </button>
+            <button type="submit"
+                class="bg-zinc-200 text-black  flex-1 px-8 py-3 rounded-2xl font-semibold text-lg hover:bg-zinc-300 transition-all mt-2 shadow-md w-full">
+                Submit
+            </button>
+        </div>
+        }
+        @else {
+        <h1 class="text-4xl px-8 font-bold mb-4 text-zinc-100">{{ internship.label }} Application</h1>
+        <div class="overflow-y-auto px-8">
             <p class="text-lg text-zinc-300 mb-6">{{ internship.description }}</p>
             @if (internship.roles) {
             <div class="mb-4">
@@ -27,11 +115,15 @@
             </div>
             }
         </div>
+        <div class="flex gap-6 px-8">
+            <button (click)="closeApplication()"
+                class="bg-black text-white flex-1 px-8 py-3 rounded-2xl font-semibold text-lg hover:bg-zinc-800 transition-all mt-2 shadow-md w-full">Cancel</button>
+            <button (click)="setShowForm()"
+                class="bg-zinc-200 text-black  flex-1 px-8 py-3 rounded-2xl font-semibold text-lg hover:bg-zinc-300 transition-all mt-2 shadow-md w-full">Continue</button>
+        </div>
+
         }
 
-        <div class="flex gap-3">
-            <button (click)="closeApplication()" class="bg-black text-white flex-1 px-8 py-3 rounded-2xl font-semibold text-lg hover:bg-zinc-800 transition-all mt-2 shadow-md w-full">Cancel</button>
-            <button (click)="closeApplication()" class="bg-zinc-200 text-black  flex-1 px-8 py-3 rounded-2xl font-semibold text-lg hover:bg-zinc-300 transition-all mt-2 shadow-md w-full">Continue</button>
-        </div>
+        }
     </div>
 </div>

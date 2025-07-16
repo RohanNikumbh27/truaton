@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Select } from '../select/select';
 
 @Component({
   selector: 'app-application',
-  imports: [],
+  imports: [Select],
   templateUrl: './application.html',
   styleUrl: './application.css'
 })
@@ -81,9 +82,25 @@ export class Application {
     },
   ];
   public internship: any;
+  public showForm: any;
+
+  educationOptions = [
+    { value: 'high-school', label: 'High School' },
+    { value: 'undergraduate', label: 'Undergraduate' },
+    { value: 'graduate', label: 'Graduate' },
+    { value: 'postgraduate', label: 'Postgraduate' }
+  ];
+
+  setShowForm( state = true){
+    this.showForm = state;
+  }
 
   closeApplication() {
     this.router.navigate(['/']);
+  }
+
+  onEducationChange(value: string) {
+    console.log('Selected education level:', value);
   }
 
   constructor(private route: ActivatedRoute, private router: Router) {
