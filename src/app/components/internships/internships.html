@@ -4,7 +4,7 @@
   </div>
   <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
     @for (intrn of internshipsArr; track $index) {
-      <div class="bg-gradient-to-r from-zinc-950 to-zinc-900 p-6 rounded-xl hover:scale-105 transform transition-all duration-500 ease-in flex flex-col justify-between items-start">
+      <div class="bg-gradient-to-r from-zinc-950 to-zinc-900/60 border border-transparent hover:border-zinc-800 p-6 rounded-xl animate-scaleUp transition-all  ease-in flex flex-col justify-between items-start">
         <h3 class="text-3xl font-semibold mb-4">{{intrn?.label}}</h3>
         <a [routerLink]="intrn?.link" class="inline-block mt-4 px-5 py-2 bg-zinc-300 text-black rounded-xl cursor-pointer font-medium hover:bg-gray-200 transitionmy-auto ">Apply</a>
       </div>

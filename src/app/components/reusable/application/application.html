@@ -1,8 +1,9 @@
-<div class="fixed h-[100svh] w-[100vw] z-[100] top-0 flex items-center justify-center bg-black/50 animate-fadeIn">
-    <div class="bg-zinc-800/80 p-8 m-auto max-h-[90%] w-[80%] md:w-[60vw] rounded-3xl backdrop-blur-lg text-white shadow-2xl overflow-y-auto animate-scaleUp">
+<div class="fixed h-[100svh] w-[100vw] z-[100] top-0 flex items-center justify-center bg-black/70 animate-fadeIn">
+    <div
+        class="bg-zinc-800/80 p-8 max-h-[70svh] w-[90%] md:w-[60vw] rounded-3xl backdrop-blur-lg text-white shadow-2xl animate-scaleUp flex flex-col">
         @if (internship) {
         <h1 class="text-4xl font-bold mb-4 text-zinc-100">{{ internship.label }} Application</h1>
-        <div class="overflow-auto max-h-[50vh]">
+        <div class="overflow-y-auto ">
 
             <p class="text-lg text-zinc-300 mb-6">{{ internship.description }}</p>
             @if (internship.roles) {

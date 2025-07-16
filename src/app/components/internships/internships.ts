@@ -52,7 +52,7 @@ export class Internships {
       link: "/careers/business-analyst-internship"
     },
     {
-      label: "Research & Development",
+      label: "R & D",
       link: "/careers/rnd-internship"
     },
     {
