@@ -83,6 +83,7 @@ export class Application {
   ];
   public internship: any;
   public showForm: any;
+  public showSuccess: boolean = false;
 
   educationOptions = [
     { value: 'high-school', label: 'High School' },
@@ -91,8 +92,13 @@ export class Application {
     { value: 'postgraduate', label: 'Postgraduate' }
   ];
 
-  setShowForm( state = true){
+  setShowForm(state = true) {
     this.showForm = state;
+  }
+
+  submitApplication() {
+    this.showSuccess = true;
+    this.showForm = false;
   }
 
   closeApplication() {
