@@ -1,7 +1,5 @@
-<div
-    class=" fixed h-[100vh] w-[100vw] z-[100] top-0 flex items-center justify-center">
-
-    <div class="bg-zinc-800/80 p-8 m-auto max-h-[90%] w-[80%] md:w-[60vw] rounded-3xl backdrop-blur-lg text-white shadow-2xl overflow-y-auto">
+<div class="fixed h-[100svh] w-[100vw] z-[100] top-0 flex items-center justify-center bg-black/50 animate-fadeIn">
+    <div class="bg-zinc-800/80 p-8 m-auto max-h-[90%] w-[80%] md:w-[60vw] rounded-3xl backdrop-blur-lg text-white shadow-2xl overflow-y-auto animate-scaleUp">
         @if (internship) {
         <h1 class="text-4xl font-bold mb-4 text-zinc-100">{{ internship.label }} Application</h1>
         <div class="overflow-auto max-h-[50vh]">
@@ -30,26 +28,8 @@
         </div>
         }
 
-        <!-- <form class="bg-zinc-900/80 rounded-2xl p-8 flex flex-col gap-6 shadow-lg mt-4">
-    <div>
-      <label for="name" class="block text-zinc-200 text-lg mb-2">Full Name</label>
-      <input id="name" name="name" type="text" required class="w-full px-4 py-3 rounded-xl bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-zinc-400 text-base" placeholder="Enter your full name" />
-    </div>
-    <div>
-      <label for="email" class="block text-zinc-200 text-lg mb-2">Email Address</label>
-      <input id="email" name="email" type="email" required class="w-full px-4 py-3 rounded-xl bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-zinc-400 text-base" placeholder="Enter your email" />
-    </div>
-    <div>
-      <label for="resume" class="block text-zinc-200 text-lg mb-2">Resume (PDF)</label>
-      <input id="resume" name="resume" type="file" accept=".pdf" required class="w-full px-4 py-2 rounded-xl bg-zinc-800 text-white border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-zinc-400 text-base file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-zinc-700 file:text-white hover:file:bg-zinc-600" />
-    </div>
-    <button type="submit" class="bg-zinc-200 text-black px-8 py-3 rounded-2xl font-semibold text-lg hover:bg-zinc-100 transition-all mt-2 shadow-md">Submit Application</button>
-  </form> -->
-
         <button (click)="closeApplication()"
             class="bg-zinc-200 text-black px-8 py-3 rounded-2xl font-semibold text-lg hover:bg-zinc-100 transition-all mt-2 shadow-md w-full">Proceed
             with Application</button>
-
     </div>
-
 </div>

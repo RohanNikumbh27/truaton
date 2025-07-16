@@ -4,9 +4,9 @@
   </div>
   <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
     @for (intrn of internshipsArr; track $index) {
-      <div class="bg-gradient-to-br from-zinc-950 to-zinc-900 p-6 rounded-2xl hover:scale-105 hover:bg-gradient-to-b hover:from-zinc-900 hover:to-zinc-950  transform transition-all duration-500 ease-out">
+      <div class="bg-gradient-to-r from-zinc-950 to-zinc-900 p-6 rounded-xl hover:scale-105 transform transition-all duration-500 ease-in flex flex-col justify-between items-start">
         <h3 class="text-3xl font-semibold mb-4">{{intrn?.label}}</h3>
-        <a [routerLink]="intrn?.link" class="inline-block mt-4 px-5 py-2 bg-zinc-300 text-black rounded-xl cursor-pointer ml-auto font-medium hover:bg-gray-200 transition">Apply</a>
+        <a [routerLink]="intrn?.link" class="inline-block mt-4 px-5 py-2 bg-zinc-300 text-black rounded-xl cursor-pointer font-medium hover:bg-gray-200 transitionmy-auto ">Apply</a>
       </div>
     }
   </div>
