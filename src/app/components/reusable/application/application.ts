@@ -1,15 +1,39 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Select } from '../select/select';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-application',
-  imports: [Select],
+  imports: [Select, FormsModule],
   templateUrl: './application.html',
   styleUrl: './application.css'
 })
 export class Application {
   
+  // Form data object
+  formData = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    educationLevel: '',
+    institution: '',
+    experience: '',
+    resume: null as File | null
+  };
+
+  // Validation errors object
+  validationErrors = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    educationLevel: '',
+    institution: '',
+    resume: ''
+  };
+
   internshipsArr = [
     {
       label: "Frontend Developer",
@@ -204,25 +228,183 @@ export class Application {
 
   setShowForm(state = true) {
     this.showForm = state;
+    // Clear validation errors when switching forms
+    this.clearValidationErrors();
+  }
+
+  validateForm(): boolean {
+    this.clearValidationErrors();
+    let isValid = true;
+
+    // First Name validation
+    if (!this.formData.firstName.trim()) {
+      this.validationErrors.firstName = 'First name is required';
+      isValid = false;
+    } else if (this.formData.firstName.trim().length < 2) {
+      this.validationErrors.firstName = 'First name must be at least 2 characters';
+      isValid = false;
+    }
+
+    // Last Name validation
+    if (!this.formData.lastName.trim()) {
+      this.validationErrors.lastName = 'Last name is required';
+      isValid = false;
+    } else if (this.formData.lastName.trim().length < 2) {
+      this.validationErrors.lastName = 'Last name must be at least 2 characters';
+      isValid = false;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!this.formData.email.trim()) {
+      this.validationErrors.email = 'Email address is required';
+      isValid = false;
+    } else if (!emailRegex.test(this.formData.email)) {
+      this.validationErrors.email = 'Please enter a valid email address';
+      isValid = false;
+    }
+
+    // Phone validation
+    const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+    if (!this.formData.phone.trim()) {
+      this.validationErrors.phone = 'Phone number is required';
+      isValid = false;
+    } else if (!phoneRegex.test(this.formData.phone.replace(/[\s\-\(\)]/g, ''))) {
+      this.validationErrors.phone = 'Please enter a valid phone number';
+      isValid = false;
+    }
+
+    // Education Level validation - now handled by select component
+    if (!this.formData.educationLevel) {
+      this.validationErrors.educationLevel = 'Education level is required';
+      isValid = false;
+    }
+
+    // Institution validation
+    if (!this.formData.institution.trim()) {
+      this.validationErrors.institution = 'Institution/University is required';
+      isValid = false;
+    }
+
+    // Resume validation
+    if (!this.formData.resume) {
+      this.validationErrors.resume = 'Resume/CV is required';
+      isValid = false;
+    } else {
+      // File size validation (5MB = 5 * 1024 * 1024 bytes)
+      const maxSize = 5 * 1024 * 1024;
+      if (this.formData.resume.size > maxSize) {
+        this.validationErrors.resume = 'File size must be less than 5MB';
+        isValid = false;
+      }
+
+      // File type validation
+      const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+      if (!allowedTypes.includes(this.formData.resume.type)) {
+        this.validationErrors.resume = 'Only PDF, DOC, and DOCX files are allowed';
+        isValid = false;
+      }
+    }
+
+    return isValid;
+  }
+
+  clearValidationErrors() {
+    this.validationErrors = {
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      educationLevel: '',
+      institution: '',
+      resume: ''
+    };
   }
 
   submitApplication() {
-    this.showSuccess = true;
-    this.showForm = false;
+    if (this.validateForm()) {
+      // Print form data to console
+      console.log('Application Form Data:', {
+        personalInfo: {
+          firstName: this.formData.firstName,
+          lastName: this.formData.lastName,
+          email: this.formData.email,
+          phone: this.formData.phone
+        },
+        education: {
+          level: this.formData.educationLevel,
+          institution: this.formData.institution
+        },
+        experience: this.formData.experience,
+        resume: this.formData.resume ? {
+          name: this.formData.resume.name,
+          size: this.formData.resume.size,
+          type: this.formData.resume.type
+        } : null,
+        appliedFor: this.internship?.label,
+        submittedAt: new Date().toISOString()
+      });
+
+      this.showSuccess = true;
+      this.showForm = false;
+    } else {
+      console.log('Form validation failed');
+    }
   }
 
   closeApplication() {
+    this.resetForm();
     this.router.navigate(['/']);
   }
 
   onEducationChange(value: string) {
-    console.log('Selected education level:', value);
+    this.formData.educationLevel = value;
+    // Clear education level error when user selects an option
+    if (value) {
+      this.validationErrors.educationLevel = '';
+    }
+  }
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.formData.resume = file;
+      // Clear resume error when file is selected
+      this.validationErrors.resume = '';
+      
+      // Validate file immediately
+      const maxSize = 5 * 1024 * 1024;
+      const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+      
+      if (file.size > maxSize) {
+        this.validationErrors.resume = 'File size must be less than 5MB';
+        this.formData.resume = null;
+      } else if (!allowedTypes.includes(file.type)) {
+        this.validationErrors.resume = 'Only PDF, DOC, and DOCX files are allowed';
+        this.formData.resume = null;
+      } else {
+        console.log('File selected:', file.name);
+      }
+    }
+  }
+
+  resetForm() {
+    this.formData = {
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      educationLevel: '',
+      institution: '',
+      experience: '',
+      resume: null
+    };
+    this.clearValidationErrors();
   }
 
   constructor(private route: ActivatedRoute, private router: Router) {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
-      // Find internship whose link ends with the id
       this.internship = this.internshipsArr.find(intrn =>
         intrn.link.endsWith(id ? id : '')
       );

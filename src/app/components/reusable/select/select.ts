@@ -24,22 +24,36 @@ export class Select implements ControlValueAccessor {
   @Input() options: SelectOption[] = [];
   @Input() placeholder: string = 'Select an option';
   @Input() disabled: boolean = false;
+  @Input() isImportant: boolean = false; // New parameter for validation
+  @Input() errorMessage: string = ''; // Error message to display
   @Output() selectionChange = new EventEmitter<string>();
 
   isOpen = false;
   selectedValue = '';
   selectedLabel = '';
+  isTouched = false;
 
-   onChange = (value: string) => {};
-   onTouched = () => {};
+  private onChange = (value: string) => {};
+  private onTouched = () => {};
 
   get displayValue(): string {
     return this.selectedLabel || this.placeholder;
   }
 
+  get hasError(): boolean {
+    return this.isImportant && this.isTouched && !this.selectedValue && !!this.errorMessage;
+  }
+
+  get shouldShowError(): boolean {
+    return this.isImportant && !!this.errorMessage;
+  }
+
   toggleDropdown() {
     if (!this.disabled) {
       this.isOpen = !this.isOpen;
+      if (!this.isTouched) {
+        this.markAsTouched();
+      }
     }
   }
 
@@ -47,9 +61,15 @@ export class Select implements ControlValueAccessor {
     this.selectedValue = option.value;
     this.selectedLabel = option.label;
     this.isOpen = false;
+    this.markAsTouched();
     this.onChange(option.value);
     this.onTouched();
     this.selectionChange.emit(option.value);
+  }
+
+  markAsTouched() {
+    this.isTouched = true;
+    this.onTouched();
   }
 
   // ControlValueAccessor implementation

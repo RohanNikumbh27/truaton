@@ -37,30 +37,64 @@
                     <div>
                         <label class="block text-sm font-medium text-zinc-300 mb-2">First Name *</label>
                         <input type="text" required placeholder="Enter your first name"
+                            [(ngModel)]="formData.firstName"
+                            name="firstName"
+                            [class.border-red-500]="validationErrors.firstName"
+                            (blur)="validateForm()"
                             class="w-full px-4 py-3 bg-black/30 border border-zinc-950 rounded-xl text-white placeholder-zinc-400 focus:border-zinc-700 focus:outline-none transition-colors">
+                        @if (validationErrors.firstName) {
+                            <p class="text-red-400 text-sm mt-1">{{ validationErrors.firstName }}</p>
+                        }
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-zinc-300 mb-2">Last Name *</label>
                         <input type="text" required placeholder="Enter your last name"
+                            [(ngModel)]="formData.lastName"
+                            name="lastName"
+                            [class.border-red-500]="validationErrors.lastName"
+                            (blur)="validateForm()"
                             class="w-full px-4 py-3 bg-black/30 border border-zinc-950 rounded-xl text-white placeholder-zinc-400 focus:border-zinc-700 focus:outline-none transition-colors">
+                        @if (validationErrors.lastName) {
+                            <p class="text-red-400 text-sm mt-1">{{ validationErrors.lastName }}</p>
+                        }
                     </div>
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-zinc-300 mb-2">Email Address *</label>
                     <input type="email" required placeholder="your.email@example.com"
+                        [(ngModel)]="formData.email"
+                        name="email"
+                        [class.border-red-500]="validationErrors.email"
+                        (blur)="validateForm()"
                         class="w-full px-4 py-3 bg-black/30 border border-zinc-950 rounded-xl text-white placeholder-zinc-400 focus:border-zinc-700 focus:outline-none transition-colors">
+                    @if (validationErrors.email) {
+                        <p class="text-red-400 text-sm mt-1">{{ validationErrors.email }}</p>
+                    }
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-zinc-300 mb-2">Phone Number *</label>
                     <input type="tel" required placeholder="+1 (555) 123-4567"
+                        [(ngModel)]="formData.phone"
+                        name="phone"
+                        [class.border-red-500]="validationErrors.phone"
+                        (blur)="validateForm()"
                         class="w-full px-4 py-3 bg-black/30 border border-zinc-950 rounded-xl text-white placeholder-zinc-400 focus:border-zinc-700 focus:outline-none transition-colors">
+                    @if (validationErrors.phone) {
+                        <p class="text-red-400 text-sm mt-1">{{ validationErrors.phone }}</p>
+                    }
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-zinc-300 mb-2">Current Education Level *</label>
-                    <app-select [options]="educationOptions" placeholder="Select your education level"
+                    <app-select 
+                        [options]="educationOptions" 
+                        placeholder="Select your education level"
+                        [isImportant]="true"
+                        [errorMessage]="validationErrors.educationLevel"
+                        [(ngModel)]="formData.educationLevel"
+                        name="educationLevel"
                         (selectionChange)="onEducationChange($event)">
                     </app-select>
                 </div>
@@ -68,20 +102,31 @@
                 <div>
                     <label class="block text-sm font-medium text-zinc-300 mb-2">Institution/University *</label>
                     <input type="text" required placeholder="e.g., Harvard University, MIT, Stanford"
+                        [(ngModel)]="formData.institution"
+                        name="institution"
+                        [class.border-red-500]="validationErrors.institution"
+                        (blur)="validateForm()"
                         class="w-full px-4 py-3 bg-black/30 border border-zinc-950 rounded-xl text-white placeholder-zinc-400 focus:border-zinc-700 focus:outline-none transition-colors">
+                    @if (validationErrors.institution) {
+                        <p class="text-red-400 text-sm mt-1">{{ validationErrors.institution }}</p>
+                    }
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-zinc-300 mb-2">Relevant Experience</label>
                     <textarea rows="4" placeholder="Tell us about any relevant experience, projects, or skills... (e.g., Previous internships, personal projects, coding bootcamps, etc.)"
+                        [(ngModel)]="formData.experience"
+                        name="experience"
                         class="w-full px-4 py-3 bg-black/30 border border-zinc-950 rounded-xl text-white placeholder-zinc-400 focus:border-zinc-700 focus:outline-none transition-colors resize-none"></textarea>
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-zinc-300 mb-2">Resume/CV *</label>
                     <div
-                        class="border-2 border-dashed bg-zinc-900 border-zinc-600 rounded-xl p-6 text-center hover:border-zinc-500 transition-colors">
-                        <input type="file" accept=".pdf,.doc,.docx" class="hidden" id="resume-upload">
+                        class="border-2 border-dashed bg-zinc-900 border-zinc-600 rounded-xl p-6 text-center hover:border-zinc-500 transition-colors"
+                        [class.border-red-500]="validationErrors.resume">
+                        <input type="file" accept=".pdf,.doc,.docx" class="hidden" id="resume-upload"
+                            (change)="onFileSelected($event)">
                         <label for="resume-upload" class="cursor-pointer">
                             <div class="text-zinc-400 mb-2">
                                 <svg class="mx-auto h-8 w-8 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -90,10 +135,19 @@
                                     </path>
                                 </svg>
                             </div>
-                            <span class="text-zinc-300">Click to upload or drag and drop</span>
+                            <span class="text-zinc-300">
+                                @if (formData.resume) {
+                                    {{ formData.resume.name }}
+                                } @else {
+                                    Click to upload or drag and drop
+                                }
+                            </span>
                             <p class="text-xs text-zinc-500 mt-1">PDF, DOC, DOCX (max 5MB)</p>
                         </label>
                     </div>
+                    @if (validationErrors.resume) {
+                        <p class="text-red-400 text-sm mt-1">{{ validationErrors.resume }}</p>
+                    }
                 </div>
             </form>
         </div>

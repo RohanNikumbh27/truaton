@@ -4,8 +4,9 @@
     class="w-full px-4 py-3 bg-black/30 border border-zinc-950 rounded-xl text-white text-left focus:border-zinc-700 focus:outline-none transition-colors flex items-center justify-between"
     [class.opacity-50]="disabled"
     [class.cursor-not-allowed]="disabled"
+    [class.border-red-500]="hasError"
     (click)="toggleDropdown()"
-    (blur)="onTouched()">
+    (blur)="markAsTouched()">
     
     <span [class.text-zinc-400]="!selectedValue">
       {{ displayValue }}
@@ -33,5 +34,10 @@
         </button>
       }
     </div>
+  }
+
+  <!-- Error Message -->
+  @if (shouldShowError) {
+    <p class="text-red-400 text-sm mt-1">{{ errorMessage }}</p>
   }
 </div>
