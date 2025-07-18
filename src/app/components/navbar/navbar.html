@@ -1,5 +1,5 @@
 <nav
-  class="fixed top-0 z-[100] left-0 right-0 min-h-[60px] h-auto bg-zinc-950/90 text-white backdrop-blur px-6 flex items-center justify-between transition-all duration-300">
+  class="fixed top-0 z-[100] left-0 right-0 min-h-[60px] h-auto bg-zinc-950/95 text-white px-6 flex items-center justify-between transition-all duration-300">
   <!-- Logo -->
   <a href="#truaton">
     <img src="/Truaton.png" alt="Truaton Logo" class="h-12" />
@@ -35,7 +35,7 @@
 <!-- Mobile Menu Overlay -->
 @if (showMenu) {
 <div
-  class="fixed inset-0 bg-black/90 backdrop-blur z-[99] flex flex-col pt-[60px] justify-center items-center"
+  class="fixed inset-0 bg-black/95 z-[99] flex flex-col pt-[60px] justify-center items-center"
   [class.animate-slideInFromTop]="!isClosing">
   <ul class="px-6 pb-4" 
       [class.animate-fadeInUp]="!isClosing"
